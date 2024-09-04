@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Inventario {
     public static void main(String[] args) {
-        showMenu();
+        inicioInventario();
     }
 
     public static int userOption(String text) {
@@ -24,10 +24,10 @@ public class Inventario {
         return option;
     }
 
-    public static void optionElection(int option) {
+    public static Object[][] optionElection (int option, Object[][] productos) {
         switch (option) {
             case 1:
-                System.out.println("Has seleccionado la opción 1");
+                agregarInventario(productos);
                 break;
             case 2:
                 System.out.println("Has seleccionado la opción 2");
@@ -38,15 +38,16 @@ public class Inventario {
             default:
                 System.out.println("Cerrando programa");
         }
+        return productos;
     }
 
-    public static void showMenu() {
-        Object[][] produtos = new Object[10][3];
+    public static void inicioInventario() {
+        Object[][] productos = new Object[10][3];
         int opcion;
         do {
             elections();
             opcion = userOption("Seleccione una opción (0 para salir)");
-            optionElection(opcion);
+            optionElection(opcion, productos);
         } while (opcion != 0);
     }
 
@@ -57,5 +58,32 @@ public class Inventario {
         System.out.println("4. Listar todos los productos");
         System.out.println("0. Salir");
     }
+
+    public static String userString(String text) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(text + " :");
+        String input = scanner.nextLine();
+        scanner.close();
+        return scanner.nextLine();
+    }
+
+    public static Object[][] agregarInventario (Object[][] listaProductos){
+        boolean producto = false;
+        System.out.println("Se va a agregar un producto");
+        int id = userOption("Ingrese el id del producto: ");
+        for (Object[] listaProducto : listaProductos) {
+            if (listaProducto[0].equals(id)) {
+                producto = true;
+                break;
+            }
+        }
+
+
+        }
+    }
+    public static Object datosProducto (boolean producto, String nombre) {
+
+    }
+
 
 }
